@@ -1,0 +1,67 @@
+---
+title: "Research Title (edit here)"
+author: "Author Name (edit here)"
+date: "`r format(Sys.Date(), '%Y-%m-%d')`"
+output:
+  pdf_document:
+    latex_engine: lualatex
+    toc: false
+    number_sections: false
+    keep_tex: true
+header-includes: |
+  \usepackage{luatexja}
+  \usepackage{luatexja-fontspec}
+  \setmainfont{IPAexMincho}
+  \usepackage{geometry}
+  \geometry{a4paper, left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+  \usepackage{fancyhdr}
+  \setlength{\headheight}{14pt}
+  \fancyhf{}
+  \lhead{Experiment Record}
+  \rhead{Report Generated: \texttt{`r params$output_timestamp`}}
+  \cfoot{\thepage}
+  \renewcommand{\headrulewidth}{0.4pt}
+  \renewcommand{\footrulewidth}{0.4pt}
+  \usepackage{booktabs}
+  \usepackage{tabularx}
+  \pagestyle{fancy}
+  \fancypagestyle{plain}{%
+    \fancyhf{}
+    \lhead{Experiment Record}
+    \rhead{Report Generated: \texttt{`r params$output_timestamp`}}
+    \cfoot{\thepage}
+    \renewcommand{\headrulewidth}{0.4pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+  }
+params:
+  subject_id: "001"
+  experiment_order: "Not set"
+  start_time: "2025-01-01 12:00"
+  end_time: "2025-01-01 13:00"
+  lab_number: "Lab-0"
+  hct_order: "Not set"
+  output_timestamp: !expr format(Sys.time(), "%Y-%m-%d %H:%M")
+  experimenter_name: "(Filled by Shiny input)"
+---
+
+\vspace{2em}
+\fontsize{14}{16}\selectfont Experiment Record
+\vspace{1em}
+
+\begin{table}[h!]
+\renewcommand{\arraystretch}{1.25}%
+\begin{tabularx}{\textwidth}{@{}p{40mm} X@{}}
+\toprule
+Item & Details \\ \midrule
+Participant ID   & `r params$subject_id` \\
+Experiment Order & `r params$experiment_order` \\
+HCT Order        & `r params$hct_order` \\
+Start            & `r params$start_time` \\
+End              & `r params$end_time` \\
+Lab Room         & `r params$lab_number` \\
+Experimenter     & `r params$experimenter_name` \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\vspace{0.5em}
